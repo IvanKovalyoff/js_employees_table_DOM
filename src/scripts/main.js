@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const table = document.querySelector('table');
   const tbody = table.querySelector('tbody');
-  const headers = table.querySelectorAll('thead th', 'tfoot th');
+  const headers = table.querySelectorAll('thead th, tfoot th');
   let sortColumnindex = null;
   let sortAsc = true;
   let activeCellEditor = null;
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </select>
     </label>
     <label>Age: <input data-qa="age" name="age" type="number" required></label>
-    <label>Salary: <input data-qa="salary" name="salary" type="text" required></label>
+    <label>Salary: <input data-qa="salary" name="salary" type="number" required></label>
     <button type="submit">Save to table</button>
   `;
 
@@ -144,16 +144,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (position.length < 2) {
       return showNotification(
         'Position must be at least 2 characters long',
-        'warning',
+        'error',
       );
     }
 
     if (isNaN(age) || age < 18) {
-      return showNotification('Age must be more than 18', 'warning');
+      return showNotification('Age must be more than 18', 'error');
     }
 
     if (age > 90) {
-      return showNotification('Age must be less than 90', 'warning');
+      return showNotification('Age must be less than 90', 'error');
     }
 
     const tr = document.createElement('tr');
